@@ -1,0 +1,195 @@
+<% if current_user %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+    <div class="form-inputs">
+      <div class="opacity-0">
+        <%= f.input :photo, label: false %>
+        <%= f.input :photo_cache, as: :hidden, label: false %>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <label for="first_name"><i class="far fa-user pr-1 mr-2"></i>First name</label>
+          <%= f.input :first_name, label: false, required: false, autofocus: true %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for=":weight"><i class="far fa-user pr-1 mr-2"></i>Last name</label>
+          <%= f.input :last_name, label: false, required: false, autofocus: true, class: "far fa-weight" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <label for=":weight"><i class="fas fa-at pr-1 mr-2"></i>Pseudo</label>
+          <%= f.input :pseudo, label: false, required: true, autofocus: true %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for=":weight"><i class="fas fa-at pr-1 mr-2"></i>Mail</label>
+          <%= f.input :email, label: false, required: true, autofocus: true %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-12 col-sm-4 small-font opacity">
+          <label for=":weight"><i class="fas fa-arrows-alt-v mr-1"></i>(cm)</label>
+          <%= f.input :height, label: false, required: false, autofocus: true %>
+        </div>
+        <div class="col-12 col-sm-4 small-font opacity">
+          <label for=":weight"><i class="fas fa-weight mr-2"></i>(kg)</label>
+          <%= f.input :weight, label: false, required: false, autofocus: true %>
+        </div>
+        <div class="col-12 col-sm-4 small-font opacity">
+          <label for=":weight"><i class="fas fa-birthday-cake"></i></label>
+          <%= f.input :birthday, label: false, required: false, autofocus: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p><i class="fas fa-key pr-1 mr-2"></i>Change your password</p>
+        </div>
+      </div>
+      <% if current_user %>
+      <div class="row small-font opacity">
+        <div class="col-12 col-sm-4">
+          <label for=":weight">current password</label>
+          <%= f.input :current_password, label: false, required: true %>
+        </div>
+        <div class="col-12 col-sm-4">
+        <label for=":weight">new password</label>
+          <%= f.input :password, label: false, required: false %>
+        </div>
+        <div class="col-12 col-sm-4">
+          <label for=":password_confirmation">confirm new password</label>
+          <%= f.input :password_confirmation, autocomplete: "off", label: false, required: false %>
+        </div>
+      </div>
+      <% else %>
+      <div class="row small-font opacity">
+        <div class="col-12 col-sm-4">
+        <label for=":weight">password</label>
+          <%= f.input :password, label: false, required: false %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for=":password_confirmation">confirm new password</label>
+          <%= f.input :password_confirmation, autocomplete: "off", label: false, required: false %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <%  if current_user %>
+      <div class="form-actions text-center">
+        <%= f.button :submit, 'Update', class: 'btn btn-primary btn-update' %>
+      </div>
+      <div class="text-center">
+        <br>
+        Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+      </div>
+    <% else %>
+      <div class="form-actions text-right">
+        <%= f.button :submit, 'Sign up', class: 'btn btn-primary btn-form' %>
+        <br>
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+    <div class="form-inputs">
+      <div class="opacity-0">
+        <%= f.input :photo, label: false %>
+        <%= f.input :photo_cache, as: :hidden, label: false %>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <label for="first_name"><i class="far fa-user pr-1 mr-2"></i>First name</label>
+          <%= f.input :first_name, label: false, required: false, autofocus: true %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for=":weight"><i class="far fa-user pr-1 mr-2"></i>Last name</label>
+          <%= f.input :last_name, label: false, required: false, autofocus: true, class: "far fa-weight" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <label for=":weight"><i class="fas fa-at pr-1 mr-2"></i>Pseudo</label>
+          <%= f.input :pseudo, label: false, required: true, autofocus: true %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for=":weight"><i class="fas fa-at pr-1 mr-2"></i>Mail</label>
+          <%= f.input :email, label: false, required: true, autofocus: true %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+        </div>
+      </div>
+      <!-- <div class="row text-center"> -->
+<!--         <div class="col-12 col-sm-4 small-font opacity"> -->
+<!--           <label for=":weight"><i class="fas fa-map-marker-alt mr-1"></i>(m)</label> -->
+<!--           <%= f.input :height, label: false, required: false, autofocus: true %> -->
+<!--         </div> -->
+<!--         <div class="col-12 col-sm-4 small-font opacity"> -->
+<!--           <label for=":weight"><i class="fas fa-weight mr-2"></i>(kg)</label> -->
+<!--           <%= f.input :weight, label: false, required: false, autofocus: true %> -->
+<!--         </div> -->
+<!--         <div class="col-12 col-sm-4 small-font opacity"> -->
+<!--           <label for=":weight"><i class="fas fa-birthday-cake"></i></label> -->
+<!--           <%= f.input :birthday, label: false, required: false, autofocus: true %> -->
+<!--         </div> -->
+<!--       </div> -->
+      <div class="row">
+        <div class="col-12">
+          <p><i class="fas fa-key pr-1 mr-2"></i>Change your password</p>
+        </div>
+      </div>
+      <% if current_user %>
+      <div class="row small-font opacity">
+        <div class="col-12 col-sm-4">
+          <label for=":weight">current password</label>
+          <%= f.input :current_password, label: false, required: true %>
+        </div>
+        <div class="col-12 col-sm-4">
+        <label for=":weight">new password</label>
+          <%= f.input :password, label: false, required: false %>
+        </div>
+        <div class="col-12 col-sm-4">
+          <label for=":password_confirmation">confirm new password</label>
+          <%= f.input :password_confirmation, autocomplete: "off", label: false, required: false %>
+        </div>
+      </div>
+      <% else %>
+      <div class="row small-font opacity">
+        <div class="col-12 col-sm-6">
+        <label for=":weight">password</label>
+          <%= f.input :password, label: false, required: false %>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for=":password_confirmation">confirm password</label>
+          <%= f.input :password_confirmation, autocomplete: "off", label: false, required: false %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <%  if current_user %>
+      <div class="form-actions text-center">
+        <%= f.button :submit, 'Update', class: 'btn btn-primary btn-update' %>
+      </div>
+      <div class="text-center">
+        <br>
+        Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
+      </div>
+    <% else %>
+      <div class="form-actions text-center mt-3">
+        <%= f.button :submit, 'Sign up', class: 'btn btn-primary btn-form' %>
+        <br>
+
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= content_for :after_js do %>
+  <%= javascript_pack_tag "uploader_btn" %>
+<%end%>

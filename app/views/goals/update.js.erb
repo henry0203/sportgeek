@@ -1,0 +1,46 @@
+<% if @goal.display == false %>
+
+  document.querySelector(".card-<%= @goal.id %>").remove();
+
+  // document.querySelectorAll(".card-goal-day").forEach((innerHTML) => {
+  //   if (document.querySelector(".card-dashboard .row") != null) {
+  //     document.querySelector(".card-dashboard .row").insertAdjacentHTML('beforeend', innerHTML.innerHTML);
+  //   } else {
+  //   }
+  // });
+
+
+<% else %>
+
+
+<% data_point = @data_points_today.find_by(key: @goal.target_key) %>
+<% d = data_point[:value].to_i %>
+<% g = @goal.target_value.to_i %>
+<% g == 0 ? g = 1 : '' %>
+<% cross_product2 = (d * 100) / g %>
+<% advancement2 = cross_product2.to_s + "%" %>
+
+var innerHTML = `
+<div class="col-offset-sm-4 col-sm-4">
+    <div class="card-goal card-goal-day card-<%= @goal.id %>">
+      <p> <%= @goal.description %> </p>
+      <div>
+        <div class="progress progress-bar-goal">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" style="width: <%= advancement2 %>" aria-valuenow="<%= advancement2 %>" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="goal-loot-stars">
+          <%= form_tag goals_path, remote: true, method: :patch do %>
+            <%= hidden_field_tag 'id', @goal.id %>
+            <%= button_tag :submit, class: 'btn btn-link' do %>
+              <p><i class="fas fa-times"></i></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>
+`;
+
+document.querySelector(".card-dashboard .row").insertAdjacentHTML('beforeend', innerHTML);
+
+<% end %>

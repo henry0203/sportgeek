@@ -1,0 +1,25 @@
+
+
+<div class="flexbox-goal-level">
+  <div class="card-badge" style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 50%), url(<%= image_path 'logo.png' %>);">
+
+  </div>
+
+  <div class="card-goal card-goal-level" style="background-color:white;color:#343f4f;">
+    <h3>Level <%= (current_user.experience.to_i/1000).round + 1 %></h3>
+    <% xp = current_user.experience %>
+    <% cross_product = (xp * 100) / 1000 %>
+    <% advancement = cross_product.to_s + "%" %>
+
+    <div>
+      <div class="progress progress-bar-level">
+        <div class="progress-bar bg-danger" role="progressbar" style="width: <%= advancement %>" aria-valuenow="<%= advancement %>" aria-valuemin="0" aria-valuemax="100"></div>
+        <%= advancement %>
+      </div>
+    </div>
+    <h4>Level <%= (current_user.experience.to_i/1000).round + 5 %> <i class="fas fa-angle-right"> </i></h4>
+    <div class="level-loot-stars">
+      <p>5 </p><i class="far fa-star"></i>
+    </div>
+  </div>
+</div>

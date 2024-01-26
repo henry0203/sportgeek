@@ -1,0 +1,67 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #161616;
+  height: auto;
+  width: 100%;
+  padding: 0px 50px;
+  color: white;
+  box-shadow: 0px 0px 7px 0 rgba(0,0,0,0.4),0 1px 0 0 rgba(0,0,0,0.03);
+
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+.footer-links a {
+  color: white;
+  opacity: 0.9;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+.footer .fa-heart {
+  color: #D23333;
+}
+.footer-copyright {
+  display: flex;
+  width: 100px;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 14px;
+  color: white;
+  opacity: 0.95;
+  line-height: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  #year {
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: 14px;
+  }
+}
+
+#stakle {
+  font-family: 'Jockey One', sans-serif;
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 25px;
+  margin: 0 auto 15px;
+  padding-bottom: 16px;
+}
+
+.title-footer {
+  margin-top: 60px;
+}
+.flexbox-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.footer-category {
+  width: 250px;
+}

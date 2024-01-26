@@ -1,0 +1,226 @@
+// Import page-specific CSS files here.
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+
+
+body {
+  background: rgba(0,0,0,0.01);
+}
+
+.container-resized-home {
+  width: 1000px;
+}
+
+.banner {
+  display: flex;
+  background-size: cover;
+  height: 100vh;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.banner-content {
+  text-align: center;
+}
+
+.text {
+  padding-bottom: 36px;
+  width: 550px;
+}
+
+.text h1 {
+  color: #161616;
+  font-weight: bolder;
+  opacity: 0.99;
+  font-family: 'Jockey One', sans-serif;
+  font-size: 108px;
+  line-height: 100px;
+  padding-top: 20px;
+  padding-bottom: -20px;
+  text-shadow: 0px 0px 5px rgba(255,255,255,0.25);
+}
+
+.text p {
+  color: #161616;
+  opacity: 0.9;
+  font-family: 'Jockey One', sans-serif;
+  font-size: 35px;
+  text-shadow: 0px 0px 8px rgba(255,255,255,0.44);
+}
+.application-description {
+  margin-top: -25px;
+  margin-bottom: 10px;
+  padding: 40px;
+  padding-bottom: 50px;
+}
+h1, h2, h3, h4, h5 {
+  color: rgba(0,0,0,0.8);
+  font-family: 'Jockey One', sans-serif;
+}
+h1 {
+  font-size: 50px;
+}
+h2 {
+  font-size: 30px;
+}
+.flexbox-application-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px;
+}
+p {
+  flex: 1 1;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+}
+
+.card-home {
+  width: 350px;
+  height: 236px;
+  opacity: 0.96;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin-right: 30px;
+}
+
+.application-pricing {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgba(16,16,16, 0.1);
+  margin-bottom: -2px;
+}
+.application-pricing-description {
+  margin: 30px;
+}
+.flexbox-application-version {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px;
+}
+.version {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.3);
+  padding: 20px 40px;
+  padding-top: 20px;
+}
+.fa-check-circle {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #7CBD1E;
+  margin-bottom: -1px;
+}
+.fa-circle {
+  margin-right: 10px;
+  font-size: 20px;
+  color: grey;
+  margin-bottom: -1px;
+}
+.list-features {
+  margin-top: 19px;
+  margin-bottom: 24px;
+}
+
+
+
+.title-supported-constructors {
+  margin-top: 70px;
+}
+.application-supported-constructors {
+  margin-bottom: 60px;
+  margin: 30px;
+}
+
+.carousel-constructors {
+  margin: 30px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.15),0 1px 0 0 rgba(0,0,0,0.03);
+  padding: 20px 27px;
+  padding-top: 20px;
+  height: 80px;
+}
+
+.flexbox-smartwatch-brands {
+  display: flex;
+  justify-content: space-between;
+}
+.apple_watch {
+  margin-top: 60px;
+}
+.fitbit {
+  margin-top: 60px;
+}
+.garmin {
+  margin-top: 51px;
+}
+.samsung_gear {
+  margin-top: 36px;
+}
+.huawei {
+  margin-top: 60px;
+}
+
+
+.application-community {
+  margin-top: 75px;
+  margin-bottom: 80px;
+}
+.card-community {
+  width: 350px;
+  height: 236px;
+  opacity: 0.96;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin-left: 30px;
+}
+
+
+.card-carousel {
+  width: 150px;
+  height: 113px;
+  opacity: 0.96;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin-left: 30px;
+}
+.card {
+  .fa-chart-line, .fa-plus, .fa-trophy, .fa-check {
+    font-size: 30px
+  }
+}
+.steps {
+  padding-top: 25px;
+}
+
+.link-btn-stk {
+  position: relative;
+  top: 170px;
+  .fa-angle-double-down {
+    color: white;
+    box-shadow: black;
+    font-size: 19px;
+    &:hover {
+    color: #2E383F;
+  }}
+}
+
+
+.link-btn-banner {
+  position: relative;
+  top: 60px;
+  .fa-angle-double-up {
+    color: black;
+    font-size: 19px;
+    &:hover {
+    color: #2E383F;
+  }}
+}

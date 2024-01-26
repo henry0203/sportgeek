@@ -1,0 +1,53 @@
+<%= render 'shared/navbar' %>
+<div class="container-upgrade">
+  <div class='upgrade'>
+    <div class="">
+      <div class="">
+        <div class="pricing-simple popular text-center card-upgrade" style="background-image: url(http://s3.amazonaws.com/iguanasportsproducao/images/wp-content/uploads/2016/06/29143201/destaque-corida.jpg); height: 440px; width: 480px;">
+          <h2></h2>
+        </div>
+      </div>
+    </div>
+    <div class="">
+      <div class="">
+        <div class="pricing-simple popular text-center card-upgrade">
+          <h2>UPGRADE</h2>
+          <div class="features text-left">
+            <ul class="list-features list-unstyled">
+              <li><p><i class="fas fa-check-circle"></i> Challenge yourself with our daily goals</p></li>
+              <li><p><i class="fas fa-check-circle"></i> Useful dashboard with your stats</p></li>
+              <li><p><i class="fas fa-check-circle"></i> Add and custom your own goals</p></li>
+              <li><p><i class="fas fa-check-circle"></i> Unlimited amount of goals</p></li>
+              <li><p><i class="fas fa-check-circle"></i> Create global goals</p></li>
+            </ul>
+          </div>
+          <div class="price-text">
+            <div class="price">
+              <div id="pre">
+                <p>Get the best of</p>
+              </div>
+              <p id="stakle">STAKLE</p>
+              <div id="aft">
+                <p>for</p>
+              </div>
+              <div id="price">
+                <p><strong>5.45 €</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <%= form_tag premium_upgrade_payments_path do %>
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-name="STAKLE Premium"
+                data-email="<%= current_user.email %>"
+                data-description="STAKLE Premium"
+                data-amount="545"
+                data-currency="€"></script>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

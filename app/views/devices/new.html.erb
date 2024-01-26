@@ -1,0 +1,25 @@
+<%= render 'shared/basic_navbar' %>
+<div class="edit">
+  <div class="text-center">
+    <h2>Set your data</h2>
+  </div>
+
+  <div class="container container-resized">
+    <%= simple_form_for(@device, url: devices_path, html: {class: "form-group form-control",style: "text-align:center"}) do |f|%>
+      <div class="form-inputs">
+          <%= f.input :name, label: 'Add or update your device name:', placeholder: @device_name %>
+      </div>
+      <label for="example-date-input" class="col-form-label">Starting date</label>
+      <input class="form-control" type="date" name="start_date" value="<%= Date.today %>" id="example-date-input">
+      <label for="example-date-input" class="col-form-label">End date</label>
+      <input class="form-control" type="date" name="end_date" value="<%= Date.today %>" id="example-date-input">
+      <div class="form-actions text-center mt-3">
+        <%= f.button :submit, label: 'Update your data', input_html: {value: "Update your data"}, class: 'btn btn-dark btn-update' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+

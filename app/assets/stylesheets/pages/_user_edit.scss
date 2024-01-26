@@ -1,0 +1,81 @@
+.opacity{
+  opacity:0.8;
+}
+.small-font{
+  font-size:12px;
+}
+.small-font-10{
+  font-size:10px;
+}
+.edit {
+  display: flex;
+  justify-content: center;
+  //padding: 210px;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  //padding-bottom: 265px;
+  //position: relative;
+}
+
+.flexbox-edit-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-resized {
+  width: auto;
+}
+
+.card-form {
+  background: rgb(245,245,245);
+  border-radius: 4px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.15),0 1px 0 0 rgba(0,0,0,0.03);
+  padding: 20px 30px;
+  width: 100%;
+  max-width: 630px;
+  //position: absolute;
+}
+
+.bg-profile{
+  position: relative;
+  width: 100%;
+  height: 150px;
+  padding-bottom: 25%;
+  background-color: #0a5792CC;
+  margin-bottom: 80px;
+}
+.profile-img{
+  position: absolute;
+  background-color:black;
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+.profile-img:hover{
+  cursor: pointer;
+}
+.btn-update{
+  margin-top: 35px;
+}
+
+
+.profile {
+  background-image: url('https://www.theriversouth.org/wp-content/uploads/2016/01/Light-Grey-Background-Tumblr-8.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.opacity-0{
+  opacity:0;
+}
+.badge:hover {
+  cursor: pointer;
+
+}

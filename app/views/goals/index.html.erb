@@ -1,0 +1,473 @@
+<%= render 'shared/navbar' %>
+<%= render 'shared/flashes' %>
+
+<div class="dashboard-banner" style="background-image: linear-gradient(-225deg, rgba(255,255,255,0.6) 0%, rgba(0,0,0,0.01) 60%), url('https://i.pinimg.com/originals/27/cd/98/27cd985c6bc96006946340980758a270.jpg'); background-size: 100%; background-position: 55% 65%">
+    <div class="title-dashboard">
+      <h1>Dashboard</h1>
+    </div>
+</div>
+
+<div class="goals">
+  <div class="title-goals text-left">
+    <h2>Goals of the day</h2>
+  </div>
+
+  <div class="modal fade modal-position" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Add a goal</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="">
+            <% array = [] %>
+            <% Goal.where(user_id: current_user.id).select("description").order('description ASC').each do |goal| %>
+              <% array << goal.description %>
+            <% end %>
+            <div class="predefined-form">
+              <%= simple_form_for [Goal.new], html: {class: "row"}, url: goals_path, style: "width: 100%", method: :patch do |f| %>
+                <h5 class="explanation-predefined">Choose the goal you want to add to your dashboard</h5>
+                <div class="form-inputs col-10">
+                  <div class="">
+                    <%= f.input :description, collection: array %>
+                  </div>
+                </div>
+                <div class="btn-predefined-form text-right col-2">
+                  <%= f.button :submit, 'Add', class: 'btn btn-add-form btn-primary' %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="predefined-form">
+              <%= simple_form_for [Goal.new], url: goals_path do |f| %>
+                <div class="form-inputs">
+                  <% unless current_user.premium %>
+                    <h4 class="invitation-upgrade text-center">Do you want to create your own goals ?</h4>
+                    <h5>Upgrade</h5>
+                    <p>Add and custom your own goals</p>
+                    <p>Unlimited amount of goals</p>
+                    <p>Create global goals</p>
+                    <%= link_to premium_upgrade_payments_path, class: 'btn btn-success btn-block modal-margin text-center' do%>
+                      <p>Upgrade your account</p>
+                    <% end %>
+                  <% else %>
+                    <h5 class="explanation-custom">Create the goal you want to add to your dashboard</h5>
+                    <%= f.input :target_key, label: 'Choose the category of the goal', collection: ["Calories burned [cal]", "Calories burned during an active period [cal]", "Steps", "Distance walked [km]", "Stairs walked", "Inactive period [min]", "Lightly active period [min]", "Fairly active period [min]", "Very active period [min]"] %>
+                    <%= f.input :target_value, label: 'Add a value in the unit precise next to your goal category' %>
+                    <div class="row">
+                      <div class="col-10">
+                        <%= f.input :description, label: 'Add a precise description of your goal' %>
+                      </div>
+                      <div class="btn-predefined-form text-right col-2">
+                        <%= f.button :submit, 'Add', class: 'btn btn-add-form btn-primary' %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="container-dashboard">
+    <div class="dashboard">
+      <div class="dashboard-goal card-dashboard col-sm-12">
+        <div>
+          <div class="add-goal-link">
+            <% url = "https://sportgeek.herokuapp.com/auth/fitbit_oauth2" %>
+            <% if Rails.env == "development" %>
+              <% url = "http://localhost:3000/auth/fitbit_oauth2" %>
+            <% end %>
+            <button type="button" class="btn btn-primary btn-sm goal-download">
+              <%= link_to url, class: '' do %>
+                <p><i class="fas fa-sync-alt"></i> Refresh your data</p>
+              <% end %>
+            </button>
+            <div class="loader" hidden="true"></div>
+          </div>
+          <div class="add-goal-link">
+            <button type="button"  id="btnToClick" class="btn btn-primary btn-sm goal-plus" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><p><i class="fas fa-plus"></i> Add a new goal </p></button>
+          </div>
+
+
+          <div class="add-goal-link">
+            <button type="button" class="btn btn-primary btn-sm goal-continuous"><p><i class="fas fa-cloud-download-alt"></i> Continuous download </p></button>
+          </div>
+          <!-- Progress bar logic -->
+
+          <% sum = 0 %>
+          <% if @goals_day.first%>
+            <% @goals_day.each do |goal| %>
+              <% data_point = @data_points_today.find_by(key: goal.target_key) %>
+              <% d = data_point[:value].to_f %>
+              <% g = goal.target_value.to_f %>
+              <% g == 0 ? g = 1 : '' %>
+              <% cross_product1 = ((d * 100) / g).to_i %>
+              <% if d >= g %>
+                <% cross_product1 = 100 %>
+              <% end %>
+              <% sum += cross_product1 %>
+            <% end %>
+            <% moy = sum.to_i / (@goals_day.count.to_i) %>
+            <% advancement1 = moy.to_s + "%" %>
+            <div class="global-goal card-goal card-goal-week col-sm-12">
+
+              <p>Progress of your daily goals</p>
+              <p id='percentage-goal'><%= advancement1 %></p>
+              <div class='link-progression'>
+                <a href="#graphs" class="link-stat"><p>Your statistics</p></a>
+              </div>
+              <% if moy < 100 %>
+                <div>
+                  <div class="progress progress-bar-global-goal">
+                    <div class="progress-bar progress-bar-animated bg-success" role="progressbar" style="width: <%= advancement1 %>" aria-valuenow="<%= advancement1 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              <% else %>
+                <div>
+                  <div class="progress progress-bar-global-goal">
+                    <div class="progress-bar bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% if @goals_day.first%>
+          <div class="row">
+            <div class="col-offset-sm-4 col-sm-4">
+              <% if @goals_day[0..2] %>
+                <% @goals_day.first(3).each do |goal| %>
+                  <div class="card-goal card-goal-day card-<%= goal.id %>">
+
+                    <!-- Progress bar logic -->
+
+                    <% data_point = @data_points_today.find_by(key: goal.target_key) %>
+                    <% d = data_point[:value].to_f %>
+                    <% g = goal.target_value.to_f %>
+                    <% cross_product2 = ((d * 100) / g).to_i %>
+                    <% advancement2 = cross_product2.to_s + "%" %>
+
+                    <p><%= goal.description %></p>
+                    <p id='percentage-goal-day' class="<%= goal.target_key.split.join.split('[').join.split(']').join.downcase%>p"><%= advancement2 %></p>
+                    <% if cross_product2 < 100 %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd progress-bar-animated bg-secondary <%= goal.target_key.split.join.split('[').join.split(']').join.downcase%>" role="progressbar" target_key="<%= goal.target_key %>" target_value="<%= goal.target_value %>" style="width: <%= advancement2 %>" aria-valuenow="<%= advancement2 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                          <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% elsif goal.state == false %>
+                      <% goal.update_attributes(state: true) %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="<%= '100%' %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                           <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% elsif goal.state == true %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="<%= '100%' %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                           <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="col-sm-offset-4 col-sm-4">
+              <% if @goals_day[3..5] %>
+                <% @goals_day[3..5].each do |goal| %>
+                  <div class="card-goal card-goal-day card-<%= goal.id %>">
+
+                    <!-- Progress bar logic -->
+
+                    <% data_point = @data_points_today.find_by(key: goal.target_key) %>
+                    <% d = data_point[:value].to_f %>
+                    <% g = goal.target_value.to_f %>
+                    <% cross_product2 = ((d * 100) / g).to_i %>
+                    <% advancement2 = cross_product2.to_s + "%" %>
+
+                    <p><%= goal.description %></p>
+                    <p id='percentage-goal-day' class="<%= goal.target_key.split.join.split('[').join.split(']').join.downcase%>p"><%= advancement2 %></p>
+                    <% if cross_product2 < 100 %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd progress-bar-animated bg-secondary <%= goal.target_key.split.join.split('[').join.split(']').join.downcase%>" role="progressbar" target_key="<%= goal.target_key %>" target_value="<%= goal.target_value %>" style="width: <%= advancement2 %>" aria-valuenow="<%= advancement2 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                           <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% elsif goal.state == false %>
+                      <% goal.update_attributes(state: true) %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="<%= '100%' %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                          <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% elsif goal.state == true %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="<%= '100%' %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                          <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="col-sm-offset-4 col-sm-4">
+              <% if @goals_day[6..8] %>
+                <% @goals_day[6..8].each do |goal| %>
+                  <div class="card-goal card-goal-day card-<%= goal.id %>">
+
+                    <!-- Progress bar logic -->
+
+                    <% data_point = @data_points_today.find_by(key: goal.target_key) %>
+                    <% d = data_point[:value].to_f %>
+                    <% g = goal.target_value.to_f %>
+                    <% cross_product2 = ((d * 100) / g).to_i %>
+                    <% advancement2 = cross_product2.to_s + "%" %>
+                    <p><%= goal.description %></p>
+                    <p id='percentage-goal-day' class="<%= goal.target_key.split.join.split('[').join.split(']').join.downcase%>p"><%= advancement2 %></p>
+
+                    <% if cross_product2 < 100 %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd progress-bar-animated bg-secondary <%= goal.target_key.split.join.split('[').join.split(']').join.downcase%>" role="progressbar" target_key="<%= goal.target_key %>" target_value="<%= goal.target_value %>" style="width: <%= advancement2 %>" aria-valuenow="<%= advancement2 %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                          <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% elsif goal.state == false %>
+                      <% goal.update_attributes(state: true) %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="<%= '100%' %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                          <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% elsif goal.state == true %>
+                      <div>
+                        <div class="progress progress-bar-goal">
+                          <div class="progress-bar pggd bg-secondary" role="progressbar" style="width: <%= '100%' %>" aria-valuenow="<%= '100%' %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="goal-loot-stars">
+                           <%= form_tag goals_path, remote: true, method: :patch do %>
+                            <%= hidden_field_tag 'id', goal.id %>
+                            <%= button_tag :submit, class: 'btn btn-link' do %>
+                              <p><i class="fas fa-times"></i></p>
+                            <% end %>
+                           <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="container-dashboard">
+    <div class="row goals-center">
+      <div class="col-sm-2">
+        <div class="card-goals">
+          <div class="card-body-goals"> <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/112452-200.png" alt="steps" style="width: 45px;">
+            <h3 id="steps_raw" class="card-title-goals"> <%= @data_points_today.find_by(key: 'Steps').value %> </h3>
+            <!-- <p class="card-text-goals"> Steps</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card-goals">
+          <div class="card-body-goals"> <img src="https://imageog.flaticon.com/icons/png/512/55/55233.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF" alt="steps" style="width: 90px;">
+            <h3 id="distance_raw" class="card-title-goals"> <%= @data_points_today.find_by(key: 'Distance walked [km]').value %> km</h3>
+            <!-- <p class="card-text-goals"> Distance</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card-goals">
+          <div class="card-body-goals"> <img src="http://www.pvhc.net/img45/nztmfjkafwxdenappfqx.png" alt="steps" style="width: 45px;">
+            <h3 id="calories_raw" class="card-title-goals"><%= @data_points_today.find_by(key: 'Calories burned [cal]').value %> cal</h3>
+            <!-- <p class="card-text-goals">Calories</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card-goals">
+          <div class="card-body-goals"> <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/126536-200.png" alt="steps" style="width: 45px">
+            <h3 class="card-title-goals"> 64 rbpm</h3>
+            <!-- <p class="card-text-goals"> B.P.M</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div id='graphs'>
+  <div class='container-dashboard'>
+    <div class="flexbox-activity-graph">
+      <div class="doughnut-activity-day">
+        <div class="title-activity-graph">
+          <h2>Activity during the day</h2>
+        </div>
+        <div class="">
+          <div class='card-graph'>
+            <div class="doughnut-activity img-fluid" style="height:38vh !important;">
+              <canvas id="doughnutChart" ></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diagram-bar-week">
+        <div class="title-activity-graph">
+          <h2>Activity during the week</h2>
+        </div>
+        <div class="">
+          <div class='card-graph'>
+            <div class="diagram-activity img-fluid" style="height:38vh !important;">
+              <canvas id="myChart" style="position: relative;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="diagram-line-weight">
+      <div class="title-activity-graph">
+        <h2>Activity during the week</h2>
+      </div>
+      <div class="">
+        <div class='card-graph'>
+          <div class="diagram-activity img-fluid">
+            <canvas id="myChart1" ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- <div class="container"> -->
+  <!--   <div class="d-flex flex-row mb-5 mt-5"> -->
+  <!--     <div class="card-dashboard p-2" style="height:50vh !important;"> -->
+  <!--       <canvas id="myChart" style="position: relative;"></canvas> -->
+  <!--     </div> -->
+  <!--     <div class="card-dashboard p-2" style="height:50vh !important;"> -->
+  <!--       <canvas id="myChart1" class="responsive" style="position: relative;"></canvas> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!--   <div class="card card-dashboard mb-5 pb-3" style="width:auto;"> -->
+  <!--     <p style="text-align: left;">Your data details for each day</p> -->
+  <!--     <div class="d-flex flex-row justify-content-around"> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut1" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut2" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut3" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut4" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut5" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--       <div class="d-inline-block" style="width:90px !important;"> -->
+  <!--         <canvas  id="doughnut6" width="150px" height="100px"></canvas> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </div> -->
+</div>
+
+<%= content_for :after_js do %>
+  <%= javascript_pack_tag "chart1" %>
+  <%= javascript_pack_tag "doughnut_chart" %>
+<%end%>
+

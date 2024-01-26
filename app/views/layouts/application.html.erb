@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= favicon_link_tag 'stackle.jpg'%>
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="Stakle" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.stakle.pw/" />
+    <meta property="og:image" content="<%= image_url 'og.jpg'%>" />
+    <meta property="og:description" content="It's all about you. It's not about anyone else and that's the journey you're on, it's all about the prize at the end, wins and losses come a dime a dozen. But effort? Nobody can judge that. Because effort is between you and you, regardless of the scoreboard, you're going to be successful because you put in all the time, all the effort, all the hard work and you know it's going to pay off." />
+    <meta property="og:site_name" content="Stakle" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Stackle - Because setting daily goals is what makes you better.</title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= include_gon %>
+    <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+  </head>
+  <body>
+    <%= yield %>
+    <%= render 'shared/footer' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+    <%= yield :after_js %>
+  </body>
+</html>

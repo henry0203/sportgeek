@@ -1,0 +1,23 @@
+<%= render 'shared/navbar' %>
+
+<div class="profile">
+  <div class="edit">
+    <div class="card-form block-ali">
+      <div class="bg-profile" id="clickmoi">
+        <% if current_user.photo %>
+          <%= cl_image_tag current_user.photo, class: "profile-img" %>
+        <% end %>
+      </div>
+      <div class="text-center">
+        <h2><%= current_user.first_name %>'s informations</h2>
+        <p class="opacity"> You can update your data below</p>
+      </div>
+      <div class="container container-resized">
+        <%= render 'shared/form' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 'http://localhost:3000/auth/fitbit_oauth2' -->
+<!-- background-image: url('http://longwallpapers.com/Desktop-Wallpaper/running-wallpaper-desktop-background-For-Desktop-Wallpaper.jpg'); background-position: bottom; -->

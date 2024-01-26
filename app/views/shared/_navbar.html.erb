@@ -1,0 +1,36 @@
+
+<div class="navbar-wagon navbar-fixed" id="nav_bar">
+  <%= link_to 'STAKLE', root_path, class: 'navbar-title' %>
+
+
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
+    <% if user_signed_in? %>
+      <!-- Links when logged in -->
+      <% if current_user.devices.size == 0 %>
+        <% url = "https://sportgeek.herokuapp.com/auth/fitbit_oauth2" %>
+        <% if Rails.env == "development" %>
+          <% url = "http://localhost:3000/auth/fitbit_oauth2" %>
+        <% end %>
+        <% Device.create(user_id: current_user.id, name: 'Fitbit device of the user #{current_user.id}') %>
+         <% url = "https://sportgeek.herokuapp.com/auth/fitbit_oauth2" %>
+        <% if Rails.env == "development" %>
+          <% url = "http://localhost:3000/auth/fitbit_oauth2" %>
+        <% end %>
+        <%= link_to 'Dashboard', url, class: 'navbar-text' %>
+      <% elsif DataPoint.where(date: DateTime.now.strftime('%Y-%m-%d')).size == 0 %>
+        <% url = "https://sportgeek.herokuapp.com/auth/fitbit_oauth2" %>
+        <% if Rails.env == "development" %>
+          <% url = "http://localhost:3000/auth/fitbit_oauth2" %>
+        <% end %>
+        <%= link_to 'Dashboard', url, class: 'navbar-text' %>
+      <% else %>
+        <%= link_to "Dashboard", goals_path, class: "navbar-text" %>
+      <% end %>
+      <%= link_to "Profile", edit_user_registration_path, class: "navbar-text" %>
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "navbar-text" %>
+    <% else %>
+      <!-- <button type="button" class="btn btn-primary btn-sm"><%= link_to 'Go for it', new_user_registration_path, class: "link-button" %></button> -->
+      <%= link_to 'Log in', new_user_session_path, class: "navbar-text" %>
+    <% end %>
+  </div>
+</div>

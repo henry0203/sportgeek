@@ -1,0 +1,61 @@
+.link {
+  text-decoration: none;
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 19px;
+  padding: 3px 20px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+.link-upgrade {
+  text-decoration: none;
+  color: black;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 19px;
+  padding: 3px 20px;
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.link-button {
+  text-decoration: none;
+  color: white;
+  padding: 0px 20px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 17px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.link-button-banner {
+  text-decoration: none;
+  color: white;
+  opacity: 0.95;
+  padding: 0px 20px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.link-stat {
+  text-decoration: none;
+  color: #161616;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 19px;
+  opacity: 0.9;
+  &:hover {
+    text-decoration: none;
+    color: #161616;
+    opacity: 1;
+  }
+}
+

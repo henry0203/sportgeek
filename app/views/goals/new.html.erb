@@ -1,0 +1,73 @@
+<%= render 'shared/navbar' %>
+<div class="new-goal">
+  <div class="">
+    <div class="text-center">
+      <h2>Add a goal</h2>
+    </div>
+
+    <div class="container container-resized">
+      <% array = [] %>
+      <% Goal.where(user_id: current_user.id).select("description").order('description ASC').each do |goal| %>
+        <% array << goal.description %>
+      <% end %>
+
+      <%= simple_form_for [@goal], url: goals_path, method: :patch do |f| %>
+        <div class="form-inputs">
+
+          <div class="text-left">
+            <h3>Free</h3>
+          </div>
+
+          <div class="">
+            <%= f.input :description, label: 'Predefined goals', collection: array %>
+          </div>
+        </div>
+
+        <div class="form-actions text-right description-field">
+          <%= f.button :submit, 'Add a new goal', class: 'btn btn-dark' %>
+        </div>
+      <% end %>
+
+      <%= simple_form_for [@goal], url: goals_path do |f| %>
+        <div class="form-inputs">
+          <% unless current_user.premium %>
+
+            <div class="premium-form text-left">
+              <h3>Premium</h3>
+            </div>
+
+            <%= f.input :target_key, disabled: true, label: 'Goal type', collection: ["Calories burned [cal]", "Calories burned during an active period [cal]", "Steps", "Distance walked [km]", "Stairs walked", "Inactive period [min]", "Lightly active period [min]", "Fairly active period [min]", "Very active period [min]"] %>
+            <%= f.input :target_value, disabled: true, label: 'Goal value' %>
+            <%= f.input :description, disabled: true, label: 'Description' %>
+
+          <% else %>
+
+            <div class="premium-form text-left">
+              <h3>Premium</h3>
+            </div>
+
+            <%= f.input :target_key, label: 'Goal type', collection: ["Calories burned [cal]", "Calories burned during an active period [cal]", "Steps", "Distance walked [km]", "Stairs walked", "Inactive period [min]", "Lightly active period [min]", "Fairly active period [min]", "Very active period [min]"] %>
+            <%= f.input :target_value, label: 'Goal value' %>
+            <%= f.input :description, label: 'Description' %>
+
+          <% end %>
+        </div>
+
+        <% unless current_user.premium %>
+
+          <div class="form-actions flexbox-edit-form">
+            <%= link_to 'Upgrade', premium_upgrade_payments_path, class: 'btn btn-primary' %>
+            <%= f.button :submit, 'Add a new goal', class: 'btn btn-dark' %>
+          </div>
+
+        <% else %>
+
+          <div class="form-actions text-right">
+            <%= f.button :submit, 'Add a new goal', class: 'btn btn-dark' %>
+          </div>
+
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

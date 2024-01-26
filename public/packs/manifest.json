@@ -1,0 +1,22 @@
+{
+  "application.js": "/packs/application-76d19499bf7ecc594e32.js",
+  "application.js.map": "/packs/application-76d19499bf7ecc594e32.js.map",
+  "bubble.js": "/packs/bubble-01f0b2455ea68bf30421.js",
+  "bubble.js.map": "/packs/bubble-01f0b2455ea68bf30421.js.map",
+  "chart1.js": "/packs/chart1-c4339e01c101708a3352.js",
+  "chart1.js.map": "/packs/chart1-c4339e01c101708a3352.js.map",
+  "continuous_refresh.js": "/packs/continuous_refresh-2cb072928a804877f836.js",
+  "continuous_refresh.js.map": "/packs/continuous_refresh-2cb072928a804877f836.js.map",
+  "doughnut_chart.js": "/packs/doughnut_chart-99505751f042fa08415f.js",
+  "doughnut_chart.js.map": "/packs/doughnut_chart-99505751f042fa08415f.js.map",
+  "gontest.js": "/packs/gontest-c13c04450bfc4e6821b1.js",
+  "gontest.js.map": "/packs/gontest-c13c04450bfc4e6821b1.js.map",
+  "loader.js": "/packs/loader-b6dc5b7878a44fb2ca1c.js",
+  "loader.js.map": "/packs/loader-b6dc5b7878a44fb2ca1c.js.map",
+  "smooth_scrolling.js": "/packs/smooth_scrolling-5f74eac84f9fe283f5d1.js",
+  "smooth_scrolling.js.map": "/packs/smooth_scrolling-5f74eac84f9fe283f5d1.js.map",
+  "test.js": "/packs/test-62568668bec528f997e3.js",
+  "test.js.map": "/packs/test-62568668bec528f997e3.js.map",
+  "uploader_btn.js": "/packs/uploader_btn-c33b268f51c4baa8d515.js",
+  "uploader_btn.js.map": "/packs/uploader_btn-c33b268f51c4baa8d515.js.map"
+}

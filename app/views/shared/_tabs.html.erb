@@ -1,0 +1,51 @@
+<!-- <ul class="nav nav-pills nav-fill"> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link"><%= link_to goals_path do %> -->
+<!--     Goals <%end%></a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link"><%= link_to tiers_path do %> -->
+<!--     Tiers <%end%></a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link"><%= link_to rankings_path do %> -->
+<!--       Rankings <%end%></a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link" href="#">Your profile</a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link" href="#">Your data</a> -->
+<!--   </li> -->
+<!-- </ul> -->
+<!-- <ul> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link active" href="#">Active</a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link" href="#">Link</a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link" href="#">Link</a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link disabled" href="#">Disabled</a> -->
+<!--   </li> -->
+<!-- </ul> -->
+<%= render 'shared/navbar' %>
+<ul class="nav nav-fill justify-content-center">
+  <li class="nav-item">
+    <!-- <a class="nav-link active" id="home-tab" data-toggle="tab" href="/goals" role="tab" aria-controls="home" aria-selected="true">Goals</a> -->
+    <%= link_to 'Goals', goals_path, class: "nav-link hover" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Tiers', tiers_path, class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Rankings', rankings_path, class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Profile', graph_path, class: "nav-link" %>
+  </li>
+</ul>
+

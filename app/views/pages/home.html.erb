@@ -1,0 +1,199 @@
+<%= render 'shared/navbar' %>
+<%= render 'shared/flashes' %>
+
+
+<div id="banner" class="banner" style="background-image: url('http://longwallpapers.com/Desktop-Wallpaper/running-wallpaper-desktop-background-For-Desktop-Wallpaper.jpg'); background-position: bottom;">
+  <div class="banner-content">
+    <div class="text">
+
+      <h1>STAKLE</h1>
+      <p>Because setting daily goals is what will take you where you want to go.</p>
+      <button type="button" class="btn btn-primary btn-banner btn-sm">
+      <%= link_to 'Start right now', new_user_registration_path, class: "link-button" %></button>
+      <div class="link-btn-stk"><a href="#stackle"><i class="fas fa-angle-double-down"></i></a></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="stackle">
+
+</div>
+
+<div class='application-description'>
+  <!-- <div class='text-center'>
+    <h2>STAKLE philosophy</h2>
+  </div>
+
+  <div class='container container-resized-home'>
+    <div class='flexbox-application-description'>
+      <p> "Outperform. Dominate your limits. Anytime. Anywhere."
+        The vision of SportGeek is to make people happy and fullfiled by supporting them in becoming the best version of theirselves. No matter if physically or mentally. Therefore, SportGeek offers a wide range of possibilities to get there: an outstanding and efficient workout program, that is doable anytime and anywhere.</p>
+      <p class="text-center">Nowadays, the data you get from your connected devices are badly managed. They are given to you in an untreated way and it's not motivating. Stakle was made to help you create your own daily objectives which are connected to your smartwatch to control your activity.</p>
+    </div> -->
+
+    <div class="steps text-center">
+      <h2>Start your adventure !</h2>
+    </div>
+
+
+    <div class=''>
+      <div class='flexbox-application-description'>
+        <div class="row text-center">
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body"> <i class="fas fa-check"></i>
+                <h3 class="card-title"> Sign in</h3>
+                <p class="card-text">It's simple and you have access to the free version with any device.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body"> <i class="fas fa-plus"></i>
+                <h3 class="card-title">Connect your device</h3>
+                <p class="card-text">After your inscription, connect your device.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body"> <i class="fas fa-trophy"></i>
+                <h3 class="card-title"> Define your goals</h3>
+                <p class="card-text">Select your goals in our free selection.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-body"> <i class="fas fa-chart-line"></i>
+                <h3 class="card-title"> Follow your progression</h3>
+                <p class="card-text"> Simple access to your progression with amazing graphs !</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!--  <div class="text-center">
+      <button type="button" class="btn btn-primary"><%= link_to 'Go for it', new_user_registration_path, class: "link" %></button></p>
+  </div> -->
+</div>
+
+<div class="wrapper-line"></div>
+
+
+<div class='application-pricing'>
+
+  <div class='text-center'>
+    <h2>Choose your version</h2>
+  </div>
+
+  <div class="container">
+    <div class="application-pricing-description d-flex justify-content-center">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="pricing-simple text-center version">
+            <h4>FREE</h4>
+            <div class="text-left">
+              <ul class="list-features list-unstyled">
+                <li><p><i class="fas fa-check-circle"></i> Challenge yourself with our daily goals</p></li>
+                <li><p><i class="fas fa-check-circle"></i> Useful dashboard with your stats</p></li>
+                <li><p><i class="far fa-circle"></i> Add and custom your own objectives</p></li>
+                <li><p><i class="far fa-circle"></i> Unlimited amount of goals</p></li>
+                <li><p><i class="far fa-circle"></i> Create global goals</p></li>
+              </ul>
+            </div>
+            <div class="bottom">
+              <a class="btn btn-dark link" href="/users/sign_up">Sign for the free version</a>
+            </div>
+          </div>
+        </div><!--price col end-->
+        <div class="col-sm-6">
+          <div class="pricing-simple popular text-center version">
+            <h4>PREMIUM</h4>
+              <div class="text-left">
+                <ul class="list-features list-unstyled">
+                  <li><p><i class="fas fa-check-circle"></i> Challenge yourself with our daily goals</p></li>
+                  <li><p><i class="fas fa-check-circle"></i> Useful dashboard with your stats</p></li>
+                  <li><p><i class="fas fa-check-circle"></i> Add and custom your own objectives</p></li>
+                  <li><p><i class="fas fa-check-circle"></i> Unlimited amount of goals</p></li>
+                  <li><p><i class="fas fa-check-circle"></i> Create global goals</p></li>
+                </ul>
+              </div>
+              <div class="bottom">
+                <%= link_to 'Upgrade for 5.45€', premium_upgrade_payments_path, class: 'btn btn-primary link' %>
+              </div>
+            </div>
+          </div><!--price col end-->
+        </div><!--pricing tables 1 simple row end-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper-line"></div>
+
+<div class="title-supported-constructors text-center">
+  <h2>Supported constructors</h2>
+</div>
+<div class="wrapper-white">
+  <div class="container">
+    <div class='application-supported-constructors'>
+      <div class='text-center'>
+        <div>
+          <ul class="flexbox-smartwatch-brands list-unstyled">
+            <li>
+              <%= link_to 'https://www.apple.com/fr/apple-watch-series-3/?afid=p238%7CswpNOatde-dc_mtid_187079nc38483_pcrid_225070131543_&cid=aos-fr-kwgo-watch--slid--bran-apple+watch-e-product-', target: "_blank" do %>
+                <%= image_tag 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Apple_Watch_official_logo.svg/2000px-Apple_Watch_official_logo.svg.png', height: 30, class: "apple_watch" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'https://www.fitbit.com/fr/store?utm_source=&utm_medium=paidsearch&gclid=EAIaIQobChMI4sSnkbff2QIVKrftCh07tAsfEAAYASAAEgJLNPD_BwE&dclid=CLbhsJK339kCFWylUQodBOgNFg', target: "_blank" do %>
+                <%= image_tag 'https://vignette.wikia.nocookie.net/logopedia/images/0/0a/Fitbit_logo_2016.svg/revision/latest?cb=20160108000300', height: 33, class: "fitbit" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'http://www.samsung.com/fr/wearables/all-wearables/?smart-watch+fitness-band', target: "_blank" do %>
+                <%= image_tag 'https://upload.wikimedia.org/wikipedia/en/d/dc/Samsung_Gear_Fit2_logo.png', height: 70, class: "samsung_gear" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'http://www.garmin.com/fr-FR?gclid=EAIaIQobChMIkr6607ff2QIVqrXtCh11NA7QEAAYASAAEgJU7PD_BwE', target: "_blank" do %>
+                <%= image_tag 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Garmin_logo.svg/2000px-Garmin_logo.svg.png', height: 40, class: "garmin" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'https://consumer.huawei.com/fr/wearables/watch2/', target: "_blank" do %>
+                <%= image_tag 'http://custom-solutions.s3.amazonaws.com/2015-11-gq-huawei2/_/img/Huawei_Logo_Black.png', height: 40, class: "huawei" %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='application-community'>
+  <div class='text-center'>
+    <h2>No community, no comparaison, just you in front of yourself</h2>
+  </div>
+
+  <div class='container container-resized-home'>
+    <div class='flexbox-application-description'>
+      <!-- <p> The best sports community out there, that accompanies, supports and motivates everyone. You get access to knowledge about nutrition, motivation and many more. All to make you the best version of yourself.</p> -->
+      <div class="text-center">
+        <p>It's all about you. It's not about anyone else and that's the journey you're on, it's all about the prize at the end, wins and losses come a dime a dozen. But effort? Nobody can judge that. Because effort is between you and you, regardless of the scoreboard, you're going to be successful because you put in all the time, all the effort, all the hard work and you know it's going to pay off.</p>
+        <!-- <button type="button" class="btn btn-primary btn-banner btn-sm"><a href="#banner" class="link-button-banner"><i class="fas fa-angle-double-up"></i></i></a></button> -->
+        <div class="link-btn-banner"><a href="#banner"><i class="fas fa-angle-double-up"></i></a></button>
+        </div>
+      </div>
+    </div>
+
+  <!--   <div class="text-center">
+      <button type="button" class="btn btn-primary"><%= link_to 'Join the aventure', new_user_registration_path, class: "link" %></button></p>
+    </div> -->
+  </div>
+</div>

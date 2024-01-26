@@ -1,0 +1,32 @@
+<%= render "shared/tabs"%>
+<div class=background-image>
+  <!-- style="background-image: url(<%= asset_path '3.jpg' %>); opacity: 1;" -->
+
+<div class="container" style="padding: 50px; color: white;">
+  <table class="table table-hover">
+    <thead class="thead-dark2">
+      <tr>
+        <th scope="col">Rank</th>
+        <th scope="col">Name</th>
+        <th scope="col">Experience</th>
+        <th scope="col">Stars</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.order('experience DESC').each_with_index do |user, index| %>
+        <tr style="color:#363636">
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= user.first_name %></td>
+          <td><%= user.experience %></td>
+          <td><%= user.stars_quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+<style> td {
+  font-family: 'Bungee', cursive;
+} </style>

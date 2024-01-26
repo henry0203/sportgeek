@@ -1,0 +1,27 @@
+<% sum = 0 %>
+<% if @goals_day.first%>
+  <% @goals_day.each do |goal| %>
+    <% data_point = @data_points_today.find_by(key: goal.target_key) %>
+    <% d = data_point[:value].to_i %>
+    <% g = goal.target_value.to_i %>
+    <% cross_product = (d * 100) / g %>
+    <% sum += cross_product %>
+  <% end %>
+  <% moy = sum.to_i / @goals_day.count.to_i %>
+  <% advancement = moy.to_s + "%" %>
+  <div class="card-goal card-goal-week" style="background-color:white;color:#343f4f;">
+    <p>Progress of your daily goals</p>
+    <div>
+      <div class="progress progress-bar-goal">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= advancement %>" aria-valuenow="<%= advancement %>" aria-valuemin="0" aria-valuemax="100"></div>
+        <%= advancement %>
+      </div>
+      <div class="goal-loot-exp">
+        <p>150 XP</p>
+      </div>
+      <div class="goal-loot-stars">
+        <p>1 <i class="far fa-star"></i></p>
+      </div>
+    </div>
+  </div>
+<% end %>

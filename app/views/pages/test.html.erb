@@ -1,0 +1,8 @@
+<%= Device.all.first %>
+<% form_for Device.all.first, url: devices_path  do |f|%>
+  <%= select_tag :device, options_for_select(["hello", "bye"]) %>
+  <%= f.submit %>
+<% end %>
+
+  <%= select_date Date.today, prefix: :start_date %>
+  <%= select_date Date.today, prefix: :end_date %>

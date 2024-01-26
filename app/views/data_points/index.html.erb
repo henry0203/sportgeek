@@ -1,0 +1,13 @@
+<% a = [] %>
+<% @data_points.map do |data_point| %>
+<% a << {key: data_point.key, value: data_point.value, date: data_point.date.to_s} %>
+<% end %>
+<%= a %>
+
+<% r = 0 %>
+<% a.each do |element| %>
+  <% if element[:key] == "Calories burned [cal]" %>
+    <% r += element[:value].to_i %>
+  <% end %>
+<% end %>
+<%= r %>
